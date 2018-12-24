@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="VolticCloud-Wrapper">
+    <output-path>F:/EXPORT/Wrapper</output-path>
+    <root id="archive" name="VolticCloud-Wrapper.jar">
+      <element id="module-output" name="VolticCloud-Wrapper" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="VolticCloud-Master">
+    <output-path>F:/EXPORT/Master</output-path>
+    <root id="archive" name="VolticCloud-Master.jar">
+      <element id="module-output" name="VolticCloud-Master" />
+    </root>
+  </artifact>
+</component>
