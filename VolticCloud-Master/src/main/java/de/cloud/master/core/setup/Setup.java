@@ -41,7 +41,7 @@ public class Setup {
             groupMode = GroupMode.valueOf(r.readLine());
 
             group.setRam(ram);
-            group.setWrapper(WrapperManager.getWrapperManager().availableWrappers.get(0));
+            group.setWrapper(null);
             group.setMaxPlayers(maxPlayers);
             group.setGroupMode(groupMode);
 

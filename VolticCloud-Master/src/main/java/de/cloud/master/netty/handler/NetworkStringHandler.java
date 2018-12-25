@@ -11,6 +11,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.net.SocketAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class NetworkStringHandler extends SimpleChannelInboundHandler<String> {
@@ -20,6 +21,7 @@ public class NetworkStringHandler extends SimpleChannelInboundHandler<String> {
     public static Channel channel;
     public static boolean isConnected = false;
     private static List<SocketAddress> connectedIps = new ArrayList<>();
+    public HashMap<SocketAddress, String> connectedWrappers = new HashMap<>();
 
     public static void init() {
         NetworkStringHandler.networkHandlerInstance = new NetworkStringHandler();
@@ -30,21 +32,24 @@ public class NetworkStringHandler extends SimpleChannelInboundHandler<String> {
         this.setChannel(ctx.channel());
         this.isConnected = true;
         connectedIps.add(ctx.channel().remoteAddress());
-        new logger(loglevel.INFO, "WRAPPER["+ctx.channel().remoteAddress()+"]> Connected...");
+        connectedWrappers.put(ctx.channel().remoteAddress(), "NEW_WRAPPER");
+        new logger(loglevel.INFO, connectedWrappers.get(ctx.channel().remoteAddress())+"["+ctx.channel().remoteAddress()+"]> Connected...");
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         if(connectedIps.contains(ctx.channel().remoteAddress())) {
             connectedIps.remove(ctx.channel().remoteAddress());
-            new logger(loglevel.WARNING, "WRAPPER["+ctx.channel().remoteAddress()+"]> Disconnected...");
+            connectedWrappers.remove(ctx.channel().remoteAddress());
+            new logger(loglevel.WARNING, connectedWrappers.get(ctx.channel().remoteAddress())+"["+ctx.channel().remoteAddress()+"]> Disconnected...");
         }
     }
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
+        String[] args = msg.split(" ");
         if(!Manager.isAuthenticated) {
-            if (msg.equalsIgnoreCase(WrapperManager.getWrapperManager().getWrapperKey())) {
+            if (args[0].equalsIgnoreCase(WrapperManager.getWrapperManager().getWrapperKey())) {
                 this.channel.writeAndFlush("Authentication with Master was successfully!");
                 Manager.isAuthenticated = true;
             } else {
@@ -52,9 +57,13 @@ public class NetworkStringHandler extends SimpleChannelInboundHandler<String> {
                 this.channel.writeAndFlush("Authentication with Master failed!");
                 this.channel.close();
             }
+        } else {
+            if(args[0].equalsIgnoreCase("WRAPPER-NAME:")) {
+                connectedWrappers.put(ctx.channel().remoteAddress(), args[1]);
+            }
         }
 
-        new logger(loglevel.INFO, "WRAPPER["+ctx.channel().remoteAddress()+"]> "+msg);
+        new logger(loglevel.INFO, connectedWrappers.get(ctx.channel().remoteAddress())+"["+ctx.channel().remoteAddress()+"]> "+msg);
     }
 
     public static void setChannel(Channel channel) {
