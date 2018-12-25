@@ -1,5 +1,6 @@
 package de.cloud.wrapper.setup;
 
+import de.cloud.wrapper.core.config.configuration.WrapperConfig;
 import de.cloud.wrapper.utils.logger;
 import de.cloud.wrapper.utils.loglevel;
 

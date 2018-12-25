@@ -15,15 +15,10 @@ public class ServerConfig {
 
     public void createDefaultServerConfigs() {
         try {
-            new File("./Wrapper/Config").mkdirs();
+            new File("./Wrapper/Configs").mkdirs();
             new File("./Wrapper/Sign").mkdirs();
             new File("./Wrapper/Proxy").mkdirs();
             new File("./Wrapper/Database").mkdirs();
-
-            File serverCFG = new File("./Cloud/");
-
-            if(!serverCFG.exists()){serverCFG.createNewFile();}
-
 
         } catch (Exception e) {
             new logger(loglevel.ERROR, e.getMessage() + " at " + e.getClass().getName());

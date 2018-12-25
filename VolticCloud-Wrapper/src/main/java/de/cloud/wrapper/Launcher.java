@@ -14,7 +14,6 @@ public class Launcher {
     private static InetAddress ipAddress;
 
     public static void main(String[] args) {
-        setWrapperName(Setup.setupWrapperName());
         setIpAddress();
         Manager.init();
         if(Manager.isReady) {
@@ -22,9 +21,9 @@ public class Launcher {
         }
     }
 
-    public static void setWrapperName(String wrapperName) {
-        Launcher.wrapperName = wrapperName;
-    }
+    //public static void setWrapperName(String wrapperName) {
+      //  Launcher.wrapperName = wrapperName;
+    //}
 
     public static void setIpAddress() {
         try {

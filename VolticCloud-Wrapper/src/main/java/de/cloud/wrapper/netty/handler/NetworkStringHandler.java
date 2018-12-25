@@ -24,6 +24,10 @@ public class NetworkStringHandler extends SimpleChannelInboundHandler<String> {
 
         new logger(loglevel.INFO, "MASTER["+ctx.channel().remoteAddress()+"]> "+msg);
 
+        if(msg.equalsIgnoreCase("Authentication with Master was successfully!")) {
+            ctx.channel().writeAndFlush("WRAPPER-NAME: "+MasterConfig.getMasterConfig().getWrapperName());
+        }
+
         if(args[0].equalsIgnoreCase("close")) {
             Manager.getManager().stop();
 
