@@ -7,6 +7,9 @@
     The Cloud also is smart, for example if your LobbyServer is almost full of players,
     the cloud automaticly creates a new LobbyServer for more players.
     
+    The VolticCloud-Team gives you a daily Support. If you need help with your Cloud 
+    or the developing of Cloud-Modules we can give Support to you on Discord!
+    
     Why don't you try VolticCloud ?
     It will safe you a lot of working time with your Minecraft-Network!
     The Cloud-API also can help you with handleing all your Plug-Ins and Players,
