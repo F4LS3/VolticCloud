@@ -14,7 +14,7 @@
     
     Please Note:
         All of the features that are listed up in the text are *NOT* implemented yet!
-        Updates for the Cloud will be released soon, we also keep you up to date.
+        Updates for the Cloud will be released soon, we will also keep you up to date.
     
 Greetings,
     F4LS3 (Role: Developer & Administrator)
