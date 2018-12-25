@@ -9,7 +9,7 @@ public class HelpCommand implements Command {
         if(args[0].equalsIgnoreCase("help")) {
             Manager.getManager().commands.forEach(command -> {
                 if(command.getUsage() != null) {
-                    System.out.println(command.getUsage());
+                    System.out.println(Ansi.ANSI_BLUE+command.getUsage()+Ansi.ANSI_RESET);
                 }
             });
         }
