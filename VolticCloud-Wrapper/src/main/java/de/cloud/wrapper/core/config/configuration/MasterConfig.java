@@ -78,9 +78,11 @@ public class MasterConfig {
     public void checkWrapperKey() {
         File keyFile = new File("./WRAPPERKEY.CLOUD");
         if(!keyFile.exists()) {
-            new logger(loglevel.ERROR, "Der Wrapperkey wurde nicht gefunden! Bitte erstelle im Master einen neuen Wrapper und kopiere den Wrapperkey in den Wrapper!");
+            new logger(loglevel.ERROR, "Der Wrapperkey wurde nicht gefunden! Bitte erstelle im Master einen neuen Wrapper und kopiere den Wrapperkey in das Wrapper Verzeichnis!");
             new logger(loglevel.INFO, "Wenn du den Wrapperkey eingefügt hast, dann starte den Wrapper bitte neu um alle änderungen zu übernehmen!");
-
+            Manager.isValid = false;
+        } else {
+            Manager.isValid = true;
         }
     }
 

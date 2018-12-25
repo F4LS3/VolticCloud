@@ -4,6 +4,7 @@ import de.cloud.wrapper.core.Command;
 import de.cloud.wrapper.core.config.FileManager;
 import de.cloud.wrapper.core.config.configuration.MasterConfig;
 import de.cloud.wrapper.netty.Client;
+import de.cloud.wrapper.utils.Ansi;
 import de.cloud.wrapper.utils.logger;
 import de.cloud.wrapper.utils.loglevel;
 
@@ -14,6 +15,7 @@ public class Manager {
 
     private static Manager managerInstance;
     public static boolean isReady = false;
+    public static boolean isValid = false;
 
     public List<Command> commands = new ArrayList<Command>();
 
@@ -27,11 +29,11 @@ public class Manager {
     }
 
     public void start() {
-        new logger(loglevel.BLANK, "\n" +
+        new logger(loglevel.BLANK, Ansi.ANSI_BLUE+"\n" +
                 " _______         _____  _     _ ______  _______ __   __ _______ _______ _______ _______\n" +
                 " |       |      |     | |     | |     \\ |______   \\_/   |______    |    |______ |  |  |\n" +
                 " |_____  |_____ |_____| |_____| |_____/ ______|    |    ______|    |    |______ |  |  |\n" +
-                "                                                                                       \n");
+                "                                                                                       \n"+Ansi.ANSI_RESET);
 
         new logger(loglevel.INFO, "Developer: F4LS3\n");
         new logger(loglevel.INFO, "Loading Wrapper...");

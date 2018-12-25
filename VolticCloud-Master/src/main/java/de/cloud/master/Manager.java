@@ -10,6 +10,7 @@ import de.cloud.master.manager.GroupManager;
 import de.cloud.master.manager.WrapperManager;
 import de.cloud.master.netty.Server;
 import de.cloud.master.netty.handler.NetworkStringHandler;
+import de.cloud.master.utils.Ansi;
 import de.cloud.master.utils.logger;
 import de.cloud.master.utils.loglevel;
 
@@ -58,11 +59,11 @@ public class Manager {
     }
 
     public void start() {
-        new logger(loglevel.BLANK, "\n" +
+        new logger(loglevel.BLANK, Ansi.ANSI_CYAN+"\n" +
                 " _______         _____  _     _ ______  _______ __   __ _______ _______ _______ _______\n" +
                 " |       |      |     | |     | |     \\ |______   \\_/   |______    |    |______ |  |  |\n" +
                 " |_____  |_____ |_____| |_____| |_____/ ______|    |    ______|    |    |______ |  |  |\n" +
-                "                                                                                       \n");
+                "                                                                                       \n"+Ansi.ANSI_RESET);
 
         new logger(loglevel.INFO, "Developer: F4LS3 \n");
         new logger(loglevel.INFO, "Loading Master...");

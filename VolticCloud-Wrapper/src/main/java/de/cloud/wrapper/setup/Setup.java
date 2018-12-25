@@ -13,6 +13,7 @@ public class Setup {
         try {
             BufferedReader r = new BufferedReader(new InputStreamReader(new DataInputStream(System.in)));
             new logger(loglevel.INFO, "Bitte gebe den Namen des Wrappers ein (z.B. Wrapper-1)!");
+            WrapperConfig.setWrapperName(r.readLine());
             return r.readLine();
 
         } catch (Exception e) {

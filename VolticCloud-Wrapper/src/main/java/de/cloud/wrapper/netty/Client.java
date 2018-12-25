@@ -39,36 +39,38 @@ public class Client {
     }
 
     public void runClient() {
-        eventLoopGroup = EPOLL ? new EpollEventLoopGroup() : new NioEventLoopGroup();
-        try {
-            this.setChannel(new Bootstrap()
-                    .group(eventLoopGroup)
-                    .channel(EPOLL ? EpollSocketChannel.class : NioSocketChannel.class)
-                    .handler(new ChannelInitializer<Channel>() {
-                        @Override
-                        protected void initChannel(Channel ch) throws Exception {
-                            ch.pipeline()
-                                    .addLast(new StringDecoder(StandardCharsets.UTF_8))
-                                    .addLast(new StringEncoder(StandardCharsets.UTF_8))
-                                    .addLast(new NetworkStringHandler());
-                        }
-                    }).connect(MasterConfig.getMasterConfig().getMasterIp(), MasterConfig.getMasterConfig().getMasterPort()).sync().channel());
-            Manager.getManager().addCommand(new StopCommand());
-            Manager.getManager().addCommand(new HelpCommand());
+        if(Manager.isValid) {
+            eventLoopGroup = EPOLL ? new EpollEventLoopGroup() : new NioEventLoopGroup();
+            try {
+                this.setChannel(new Bootstrap()
+                        .group(eventLoopGroup)
+                        .channel(EPOLL ? EpollSocketChannel.class : NioSocketChannel.class)
+                        .handler(new ChannelInitializer<Channel>() {
+                            @Override
+                            protected void initChannel(Channel ch) throws Exception {
+                                ch.pipeline()
+                                        .addLast(new StringDecoder(StandardCharsets.UTF_8))
+                                        .addLast(new StringEncoder(StandardCharsets.UTF_8))
+                                        .addLast(new NetworkStringHandler());
+                            }
+                        }).connect(MasterConfig.getMasterConfig().getMasterIp(), MasterConfig.getMasterConfig().getMasterPort()).sync().channel());
+                Manager.getManager().addCommand(new StopCommand());
+                Manager.getManager().addCommand(new HelpCommand());
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(System.in)));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.length() != 0) {
-                    for (Command command : Manager.getManager().commands) {
-                        command.execute(line.split(" "));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(System.in)));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.length() != 0) {
+                        for (Command command : Manager.getManager().commands) {
+                            command.execute(line.split(" "));
+                        }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                eventLoopGroup.shutdownGracefully();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            eventLoopGroup.shutdownGracefully();
         }
     }
 
