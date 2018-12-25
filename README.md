@@ -1,7 +1,7 @@
 # VolticCloud
     VolticCloud is an Minecraft-Server-System that can handle proxies and gameservers at one time.
     It can handle more than one Minecraft- or BungeeCord Server, by creating groups of servers.
-    It also comes with some nice features, like an in-built SignSystem or evan a Webinterface.
+    It also comes with some nice features, like an in-built SignSystem or even a Webinterface.
     The VolticCloud has a AddonSystem, that means you can develope an Module with the VolticModule-API
     and load it into your Cloud!
     The Cloud also is smart, for example if your LobbyServer is almost full of players,
